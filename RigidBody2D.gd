@@ -3,9 +3,9 @@ extends RigidBody2D
 var disable_keyboard = false;
 var disable_mouse = false;
 
-const impulse_value_y = 75
-const impulse_value_x = 25
-const mouse_impulse = 1.4
+const force_y = 75
+const force_x = 25
+const mouse_force = 1.4
 const mouse_max = 65
 
 var force = Vector2(0, 0)
@@ -16,13 +16,13 @@ var mouse_pressed;
 
 func _physics_process(delta):
 	#print(arrow_key_direction);
-	force += Vector2(arrow_key_direction.x*impulse_value_x, arrow_key_direction.y*impulse_value_y)
+	force += Vector2(arrow_key_direction.x*force_x, arrow_key_direction.y*force_y)
 	
 	if mouse_pressed && mouse_position:
 		var mouse_position_new =  get_global_mouse_position()
 		
 		var difference = mouse_position_new - mouse_position;
-		var force_to_be_added = (Vector2(difference.x, difference.y*3)) * mouse_impulse
+		var force_to_be_added = (Vector2(difference.x, difference.y*3)) * mouse_force
 		if(force_to_be_added.length()>=mouse_max):
 			force_to_be_added = mouse_max*force_to_be_added.normalized()
 		force += force_to_be_added
