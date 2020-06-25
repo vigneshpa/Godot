@@ -15,7 +15,7 @@ var mouse_pressed;
 
 
 func _physics_process(delta):
-	print(arrow_key_direction);
+	#print(arrow_key_direction);
 	force += Vector2(arrow_key_direction.x*impulse_value_x, arrow_key_direction.y*impulse_value_y)
 	
 	if mouse_pressed && mouse_position:
