@@ -7,6 +7,7 @@ const force_y = 75
 const force_x = 25
 const mouse_force = 1.4
 const mouse_max = 65
+const mouse_tail = 0.5
 
 var force = Vector2(0, 0)
 var arrow_key_direction = Vector2(0, 0)
@@ -26,8 +27,8 @@ func _physics_process(delta):
 		if(force_to_be_added.length()>=mouse_max):
 			force_to_be_added = mouse_max*force_to_be_added.normalized()
 		force += force_to_be_added
-		mouse_position += difference.normalized()*difference.length()*0.9
-		#print(difference)
+		mouse_position += difference.normalized()*difference.length()*mouse_tail
+		print(difference)
 		
 		
 	elif mouse_pressed:
@@ -50,7 +51,10 @@ func _unhandled_input(event):
 			direction += Vector2(-1, 0)
 		if Input.is_action_pressed("ui_right"):
 			direction += Vector2(1, 0)
-		arrow_key_direction = direction;
+		if direction.length() > 1 :
+			arrow_key_direction = direction.normalized();
+		else:
+			arrow_key_direction = direction
 	if event is InputEventMouseButton && not disable_mouse:
 		if event.button_index == 1 :
 			if event.pressed:
