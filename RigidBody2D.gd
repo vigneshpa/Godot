@@ -28,7 +28,7 @@ func _physics_process(delta):
 			force_to_be_added = mouse_max*force_to_be_added.normalized()
 		force += force_to_be_added
 		mouse_position += difference.normalized()*difference.length()*mouse_tail
-		print(difference)
+#		print(difference)
 		
 		
 	elif mouse_pressed:
